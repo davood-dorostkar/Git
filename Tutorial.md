@@ -8,14 +8,8 @@ show current global user email
 ```bash
 git config --global user.email
 ```
-show current repo-specific user name
-```bash
-git config user.name
-```
-show current repo-specific user email
-```bash
-git config user.email
-```
+show repo-specific user name: just ommit the `--global`
+
 ### Set
 set global user email
 ```bash
@@ -25,15 +19,13 @@ set global user name
 ```bash
 git config --global user.name "davood"
 ```
-set repo-specific user email
-```bash
-git config user.email "davood.dorostkar.ut@gmail.com"
-```
-set repo-specific user name
-```bash
-git config user.name "davood"
-```
+set repo-specific user name: just ommit the `--global`
 
+### remove
+other cases are the same
+```bash
+git config --global --unset user.name
+```
 
 CLEAN STEPS FROM SCRATCH  
 
