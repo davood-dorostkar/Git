@@ -17,7 +17,7 @@ setup:
 git init
 git add .
 git config --global user.email "<your email>"
-git remote add origin "github repo URL"
+git remote add origin <github repo URL>
 ```
 
 push to remote:
