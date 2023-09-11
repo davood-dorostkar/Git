@@ -4,7 +4,7 @@ Here is a list of mainly used Git commands.
 
 [Configuring Git](/config.md)
 
-[Initialization](/start_a_repo.md)
+[Initialization](/init.md)
 
 [Examine your repo](/examine_repo.md)
 
