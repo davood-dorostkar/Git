@@ -1,22 +1,21 @@
-to create new branch
+### create new branch
 
 ```
 git checkout -b 00001_START
 ```
 
-list branch
+### list branches
 
 ```
 git branch
 ```
 
-to go to specific branch
-
+### switch to branch
 ```
 git checkout branchname
 ```
 
-to merge a branch to another
+### merge a branch to another
 
 ```
 git merge sourceBranchName
@@ -24,14 +23,21 @@ git merge sourceBranchName
 
 > Note: the destination is the currently active branch
 
-remove a branch locally
+### remove a branch locally
 
 ```
-git branch –d branchName
+git branch -d branchName
 ```
 
-remove a branch remotely
+### remove a branch remotely
 
 ```
-git push origin –delete branchName
+git push origin --delete branchName
+```
+### rename branch
+```
+git checkout <new name>
+git branch -d --force <last name>
+git push origin --delete <last name>
+git push -u origin <new name>
 ```
