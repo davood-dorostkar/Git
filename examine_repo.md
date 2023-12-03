@@ -28,3 +28,7 @@ Show `push` and `fetch` URLs seperately:
 ```
 git remote -v
 ```
+change remote url:
+```
+git remote set-url origin <new url>
+```
