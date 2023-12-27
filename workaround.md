@@ -6,4 +6,12 @@ git diff <comm1> <comm2>
 ```
 git reset --hard <commit Hash>
 ```
-
+### Undo last commit but keep changes into staging
+```
+git reset --soft HEAD^
+```
+### Undo last commit from remote repo
+```
+git reset --soft HEAD^
+git push origin +HEAD^:<branch_name>
+```
