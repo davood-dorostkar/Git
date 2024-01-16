@@ -1,6 +1,5 @@
+![](/git.webp)
 # Git Tutorial
-
-Here is a list of mainly used Git commands.
 
 [Configuring Git](/config.md)
 
@@ -19,3 +18,7 @@ Here is a list of mainly used Git commands.
 [Security](/security.md)
 
 [Stash](/stash.md)
+
+Details of a feature branch workflow:
+
+![](/git-workflow.png)
