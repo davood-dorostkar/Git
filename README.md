@@ -17,3 +17,5 @@ Here is a list of mainly used Git commands.
 [Tracking files](/tracking.md)
 
 [Security](/security.md)
+
+[Stash](/stash.md)
