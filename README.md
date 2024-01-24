@@ -19,6 +19,8 @@
 
 [Stash](/stash.md)
 
+[Tag](/tag.md)
+
 Details of a feature branch workflow:
 
 ![](/git-workflow.png)
