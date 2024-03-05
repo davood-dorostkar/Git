@@ -1,4 +1,4 @@
-### check differenced between commits
+### check differences between commits
 ```
 git diff <comm1> <comm2>
 ```
