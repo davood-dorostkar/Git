@@ -15,3 +15,11 @@ git reset --soft HEAD^
 git reset --soft HEAD^
 git push origin +HEAD^:<branch_name>
 ```
+### See the changes done with last commit
+```
+git show
+```
+or 
+```
+git diff HEAD^ HEAD
+```
