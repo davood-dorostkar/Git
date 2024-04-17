@@ -10,10 +10,10 @@ git reset --hard <commit Hash>
 ```
 git reset --soft HEAD^
 ```
-### Undo last commit from remote repo
+### Undo last 2 commits from local and then remote repo
 ```
-git reset --soft HEAD^
-git push origin +HEAD^:<branch_name>
+git reset --hard HEAD~2
+git push origin HEAD --force
 ```
 ### See the changes done with last commit
 ```
