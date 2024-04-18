@@ -32,6 +32,12 @@ git config --global user.name "davood"
 
 set repo-specific user name: just ommit the `--global`
 
+### Config with Commit
+set the user for the specific commit:
+```bash
+git commit --author='Davood Dororstkar <davood.dorostkar.ut@gmail.com>' -m 'fix: issue with controller'
+```
+
 ### remove
 
 other cases are the same
