@@ -9,6 +9,8 @@
 
 [workaround in history](/workaround.md)
 
+[diff](/diff.md)
+
 [Branches](/branches.md)
 
 [Download and upload](/transfer.md)
