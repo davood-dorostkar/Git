@@ -23,6 +23,10 @@
 
 [Tag](/tag.md)
 
+[Cherry pick](/cherry-pick.md)
+
+[Squash](/squash.md)
+
 Details of a feature branch workflow:
 
 ![](/git-workflow.png)
