@@ -3,17 +3,22 @@
 ```
 git status
 ```
-
 ```
 git log
 ```
-
 ```
 git reflog
 ```
-
 ```
 git branch -vv
+```
+last 4 commits:
+```
+git log -4
+```
+breif logs:
+```
+git log --oneline
 ```
 ## Check remote status
 only show remote URL:
