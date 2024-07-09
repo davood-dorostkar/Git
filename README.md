@@ -5,6 +5,8 @@
 
 [Initialization](/init.md)
 
+[Commit](/commit.md)
+
 [Examine your repo](/examine_repo.md)
 
 [workaround in history](/workaround.md)
