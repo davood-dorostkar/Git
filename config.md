@@ -45,3 +45,7 @@ other cases are the same
 ```bash
 git config --global --unset user.name
 ```
+### Disable file type tracking
+```bash
+git config core.fileMode false
+```
