@@ -29,6 +29,8 @@
 
 [Squash](/squash.md)
 
+[Submodule](/submodule.md)
+
 Details of a feature branch workflow:
 
 ![](/git-workflow.png)
