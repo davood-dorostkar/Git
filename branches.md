@@ -34,6 +34,20 @@ git branch -d branchName
 ```
 git push origin --delete branchName
 ```
+### remove any branch in local that is no longer on the remote
+```
+git fetch --prune
+```
+### receive the updates of other branches when cloned it as shallow previously
+```
+nano .git/config
+```
+make sure you have all branches(*) in fetch list:
+```
+[remote "origin"]
+	url = <URL>.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+```
 ### rename branch
 ```
 git checkout <new name>
