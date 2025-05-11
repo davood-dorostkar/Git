@@ -31,3 +31,20 @@ git diff HEAD^ HEAD
 ```sh
 git restore --staged FILE
 ```
+### Remove the history older than a time
+install:
+```sh
+sudo apt install git-filter-repo
+```
+change the date below and run:
+```sh
+git filter-repo --force --commit-callback '
+    import datetime
+    cutoff = datetime.datetime(2024, 12, 1)
+    # "author_date" returns something like: b"1726143061 +0000"
+    timestamp = int(commit.author_date.decode().split()[0])
+    commit_date = datetime.datetime.utcfromtimestamp(timestamp)
+    if commit_date < cutoff:
+        commit.skip()
+'
+```
