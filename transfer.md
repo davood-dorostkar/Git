@@ -16,6 +16,11 @@ to get only the last commit:
 git clone --depth 1 <url>
 ```
 
+to get only one branch:
+```
+git clone --branch <branch-name> --single-branch <repo-url>
+```
+
 to get all changes in repository (the downloaded files are separate from local ones)
 
 ```
