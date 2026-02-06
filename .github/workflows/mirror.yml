@@ -1,0 +1,33 @@
+name: Mirror to hamgit (SSH)
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "Davood Dorostkar"
+          git config user.email "davood.dorostkar.ut@gmail.com"
+
+      - name: Add SSH Remote
+        run: |
+          git remote add hamgit git@hamgit.ir:davood-dorostkar/Git.git
+
+      - name: Push to hamgit
+        run: |
+          git push --all hamgit
+          git push --tags hamgit
