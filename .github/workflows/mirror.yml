@@ -18,24 +18,32 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
 
-      - name: Configure SSH to Trust GitLab
+      - name: Configure SSH to Trust hamgit.ir
         run: |
           mkdir -p ~/.ssh
-          # Get GitLab's SSH fingerprint and add to known_hosts
-          ssh-keyscan -H hamgit.ir >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
           
-          # Verify it was added
-          echo "=== GitLab's SSH key fingerprint ==="
+          # Get hamgit.ir's SSH fingerprint and add to known_hosts
+          ssh-keyscan hamgit.ir >> ~/.ssh/known_hosts
+          
+          # Also add with port 22 explicitly if needed
+          ssh-keyscan -p 22 hamgit.ir >> ~/.ssh/known_hosts
+          
+          # Verify it was added (remove grep to see all content)
+          echo "=== hamgit.ir SSH key fingerprint ==="
           ssh-keyscan hamgit.ir | ssh-keygen -lf -
           
-          echo "=== known_hosts content ==="
-          cat ~/.ssh/known_hosts | grep hamgit
+          echo "=== known_hosts content (first few lines) ==="
+          head -10 ~/.ssh/known_hosts
+          
+          # Set proper permissions
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Test SSH Connection
         run: |
-          echo "Testing SSH connection to GitLab..."
-          ssh -T git@hamgit.ir 2>&1 | head -5
-          # Should show: "Welcome to GitLab, @username!"
+          echo "Testing SSH connection to hamgit.ir..."
+          # Use -o StrictHostKeyChecking=no for first connection
+          ssh -o StrictHostKeyChecking=no -T git@hamgit.ir 2>&1 | head -10
 
       - name: Configure Git
         run: |
@@ -47,30 +55,44 @@ jobs:
           # Clean up any existing remote
           git remote remove hamgit 2>/dev/null || true
           
-          # Get your GitLab username/group
-          # Replace "YOUR_GITLAB_USERNAME" with your actual GitLab username
           GITLAB_USER="davood-dorostkar"
           REPO_NAME="${{ github.event.repository.name }}"
           
-          # Add remote (notice I'm using your remote name "hamgit")
+          # Add remote - IMPORTANT: Check your actual GitLab path!
+          # If you have groups/subgroups, it might be different
           git remote add hamgit git@hamgit.ir:${GITLAB_USER}/${REPO_NAME}.git
+          
+          # Alternative if you use subgroups: git@hamgit.ir:group/subgroup/repo.git
           
           echo "Remote added:"
           git remote -v
+          
+          # Test if remote is accessible
+          echo "Testing remote access..."
+          git ls-remote hamgit 2>&1 | head -5 || echo "Cannot access remote yet"
 
       - name: Push to GitLab
         run: |
-          echo "Pushing to GitLab..."
+          echo "Pushing to hamgit.ir..."
+          echo "Current branch: ${GITHUB_REF#refs/heads/}"
+          echo "Repository: ${{ github.repository }}"
           
-          # Try with verbose output
-          GIT_SSH_COMMAND="ssh -v" git push --all hamgit 2>&1 | tail -20 || {
-            echo "First push failed, trying with --force"
-            git push --all hamgit --force
+          # First, verify we can connect
+          echo "=== Testing SSH connection ==="
+          ssh -o BatchMode=yes -T git@hamgit.ir 2>&1 || true
+          
+          # Push with debug
+          echo "=== Attempting push ==="
+          set -x  # Enable debug output
+          git push --all hamgit 2>&1 || {
+            echo "Normal push failed, trying with --force"
+            git push --all hamgit --force 2>&1
           }
+          set +x
           
-          # Push tags if on main/master
+          # Push tags from main/master
           BRANCH_NAME=${GITHUB_REF#refs/heads/}
           if [[ "$BRANCH_NAME" == "main" || "$BRANCH_NAME" == "master" ]]; then
             echo "Pushing tags from $BRANCH_NAME branch"
-            git push --tags hamgit || git push --tags hamgit --force
+            git push --tags hamgit 2>&1 || git push --tags hamgit --force 2>&1
           fi
